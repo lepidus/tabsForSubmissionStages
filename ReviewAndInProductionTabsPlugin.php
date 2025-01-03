@@ -16,6 +16,7 @@ namespace APP\plugins\generic\reviewAndInProductionTabs;
 
 use PKP\plugins\GenericPlugin;
 use APP\core\Application;
+use PKP\plugins\Hook;
 
 class ReviewAndInProductionTabsPlugin extends GenericPlugin
 {
@@ -23,6 +24,7 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
     {
         $success = parent::register($category, $path);
         if ($success && $this->getEnabled()) {
+            Hook::add('TemplateManager::display', [$this, 'displayTabs']);
         }
         return $success;
     }
@@ -35,6 +37,36 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
     public function getDescription()
     {
         return __('plugins.generic.reviewAndInProductionTabsPlugin.description');
+    }
+
+    public function displayTabs(string $hookName, array $params): bool
+    {
+        [$templateManager, $template] = $params;
+
+        switch ($template) {
+            case 'dashboard/index.tpl':
+                $templateManager->registerFilter('output', [$this, 'tabsFilter']);
+                break;
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    public function tabsFilter($output, $templateMgr): string
+    {
+        if (!preg_match('/(<tab[^>]+id="archive"[^>]*>.*?<\/tab>)/s', $output, $matches, PREG_OFFSET_CAPTURE)) {
+            return $output;
+        }
+
+        $offset = $matches[0][1] + strlen($matches[0][0]);
+
+        $newOutput = substr($output, 0, $offset);
+        $newOutput .= $templateMgr->fetch($this->getTemplateResource('tabs.tpl'));
+        $newOutput .= substr($output, $offset);
+
+        $output = $newOutput;
+
+        return $output;
     }
 
     public function getCanEnable()
