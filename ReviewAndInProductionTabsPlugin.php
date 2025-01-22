@@ -17,6 +17,10 @@ namespace APP\plugins\generic\reviewAndInProductionTabs;
 use PKP\plugins\GenericPlugin;
 use APP\core\Application;
 use PKP\plugins\Hook;
+use PKP\db\DAORegistry;
+use PKP\security\Role;
+use PKP\template\PKPTemplateManager;
+use PKP\submission\PKPSubmission;
 
 class ReviewAndInProductionTabsPlugin extends GenericPlugin
 {
@@ -43,11 +47,61 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
     {
         [$templateManager, $template] = $params;
 
-        switch ($template) {
-            case 'dashboard/index.tpl':
-                $templateManager->registerFilter('output', [$this, 'tabsFilter']);
-                break;
+        if ($template !== 'dashboard/index.tpl') {
+            return false;
         }
+
+        $userRoles = $templateManager->getTemplateVars('userRoles');
+        // only add incomplete submissions tab to super role
+        if (!array_intersect([Role::ROLE_ID_SITE_ADMIN, Role::ROLE_ID_MANAGER], $userRoles)) {
+            return false;
+        }
+
+        $request = Application::get()->getRequest();
+        $context = $request->getContext();
+        $dispatcher = $request->getDispatcher();
+        $apiUrl = $dispatcher->url($request, Application::ROUTE_API, $context->getPath(), '_submissions');
+
+        $componentsState = $templateManager->getState('components');
+
+        $this->loadResources($request, $templateManager);
+
+        $inReviewListPanel = new \APP\components\listPanels\SubmissionsListPanel(
+            'customSubmissions',
+            __('common.queue.short.submissionsInReview'),
+            [
+                'apiUrl' => $apiUrl,
+                'getParams' => [
+                    'stageIds' => [WORKFLOW_STAGE_ID_INTERNAL_REVIEW, WORKFLOW_STAGE_ID_EXTERNAL_REVIEW],
+                ],
+                'lazyLoad' => true,
+                'includeIssuesFilter' => $includeIssuesFilter,
+                'includeAssignedEditorsFilter' => $includeAssignedEditorsFilter,
+                'includeActiveSectionFiltersOnly' => true,
+            ]
+        );
+        $componentsState[$inReviewListPanel->id] = $inReviewListPanel->getConfig();
+
+        $inProductionListPanel = new \APP\components\listPanels\SubmissionsListPanel(
+            'inProduction',
+            __('plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel'),
+            [
+                'apiUrl' => $apiUrl,
+                'getParams' => [
+                    'stageIds' => [WORKFLOW_STAGE_ID_EDITING, WORKFLOW_STAGE_ID_PRODUCTION],
+                    'status' => [PKPSubmission::STATUS_QUEUED]
+                ],
+                'lazyLoad' => true,
+                'includeIssuesFilter' => $includeIssuesFilter,
+                'includeAssignedEditorsFilter' => $includeAssignedEditorsFilter,
+                'includeActiveSectionFiltersOnly' => true,
+            ]
+        );
+        $componentsState[$inProductionListPanel->id] = $inProductionListPanel->getConfig();
+
+        $templateManager->setState(['components' => $componentsState]);
+
+        $templateManager->registerFilter('output', [$this, 'tabsFilter']);
 
         return Hook::CONTINUE;
     }
@@ -79,5 +133,28 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
     {
         $request = Application::get()->getRequest();
         return $request->getContext() !== null;
+    }
+
+    private function loadResources($request, $templateMgr)
+    {
+        $pluginFullPath = $request->getBaseUrl() . DIRECTORY_SEPARATOR . $this->getPluginPath();
+
+        $templateMgr->addJavaScript(
+            'custom-submissions-list-item',
+            $pluginFullPath . '/js/components/CustomSubmissionsListItem.js',
+            [
+                'priority' => PKPTemplateManager::STYLE_SEQUENCE_LAST,
+                'contexts' => ['backend']
+            ]
+        );
+
+        $templateMgr->addStyleSheet(
+            'custom-submissions-list-style',
+            $pluginFullPath . '/styles/submissionsPage.css',
+            [
+                'priority' => PKPTemplateManager::STYLE_SEQUENCE_LAST,
+                'contexts' => ['backend']
+            ]
+        );
     }
 }

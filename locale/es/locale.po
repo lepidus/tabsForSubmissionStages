@@ -1,5 +1,8 @@
-msgid: "plugins.generic.reviewAndInProductionTabs.displayName"
-msgstr: "Pestañas de Envíos en Revisión y Aceptados/En Revisión"
+msgid "plugins.generic.reviewAndInProductionTabs.displayName"
+msgstr "Pestañas de Envíos en Revisión y Aceptados/En Producción"
 
-msgid: "plugins.generic.reviewAndInProductionTabs.description"
-msgstr: "Agrega pestañas para envíos en revisión y aceptados/en revisión en la página de envíos."
+msgid "plugins.generic.reviewAndInProductionTabs.description"
+msgstr "Agrega pestañas para envíos en revisión y aceptados/en producción en la página de envíos."
+
+msgid "plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel"
+msgstr "Aceptados/En Producción"
