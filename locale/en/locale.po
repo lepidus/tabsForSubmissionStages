@@ -1,5 +1,8 @@
-msgid: "plugins.generic.reviewAndInProductionTabs.displayName"
-msgstr: "Submissions in Review and Accepted/In Review Tabs"
+msgid "plugins.generic.reviewAndInProductionTabs.displayName"
+msgstr "Submissions in Review and Accepted/In Production Tabs"
 
-msgid: "plugins.generic.reviewAndInProductionTabs.description"
-msgstr: "Adds tabs for submissions in review and accepted/in review on the submissions page."
+msgid "plugins.generic.reviewAndInProductionTabs.description"
+msgstr "Adds tabs for submissions in review and accepted/in production on the submissions page."
+
+msgid "plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel"
+msgstr "Accepted/In Production"

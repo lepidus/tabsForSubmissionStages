@@ -20,6 +20,7 @@ use PKP\plugins\Hook;
 use PKP\db\DAORegistry;
 use PKP\security\Role;
 use PKP\template\PKPTemplateManager;
+use PKP\submission\PKPSubmission;
 
 class ReviewAndInProductionTabsPlugin extends GenericPlugin
 {
@@ -80,6 +81,23 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
             ]
         );
         $componentsState[$inReviewListPanel->id] = $inReviewListPanel->getConfig();
+
+        $inProductionListPanel = new \APP\components\listPanels\SubmissionsListPanel(
+            'inProduction',
+            __('plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel'),
+            [
+                'apiUrl' => $apiUrl,
+                'getParams' => [
+                    'stageIds' => [WORKFLOW_STAGE_ID_EDITING, WORKFLOW_STAGE_ID_PRODUCTION],
+                    'status' => [PKPSubmission::STATUS_QUEUED]
+                ],
+                'lazyLoad' => true,
+                'includeIssuesFilter' => $includeIssuesFilter,
+                'includeAssignedEditorsFilter' => $includeAssignedEditorsFilter,
+                'includeActiveSectionFiltersOnly' => true,
+            ]
+        );
+        $componentsState[$inProductionListPanel->id] = $inProductionListPanel->getConfig();
 
         $templateManager->setState(['components' => $componentsState]);
 
