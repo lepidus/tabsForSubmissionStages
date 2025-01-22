@@ -147,5 +147,14 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
                 'contexts' => ['backend']
             ]
         );
+
+        $templateMgr->addStyleSheet(
+            'custom-submissions-list-style',
+            $pluginFullPath . '/styles/submissionsPage.css',
+            [
+                'priority' => PKPTemplateManager::STYLE_SEQUENCE_LAST,
+                'contexts' => ['backend']
+            ]
+        );
     }
 }
