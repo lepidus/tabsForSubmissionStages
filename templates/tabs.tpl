@@ -1,6 +1,3 @@
-{* <tab id="submissionsInReview" label="{translate key='common.queue.short.submissionsInReview'}">
-</tab> *}
-
 <tab id="submissionsInReview" label="{translate key="common.queue.short.submissionsInReview"}" :badge="components.customSubmissions.itemsMax">
     <submissions-list-panel
         v-bind="components.customSubmissions"
