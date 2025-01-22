@@ -246,19 +246,6 @@ let listItemTemplate = pkp.Vue.compile(`
 		},
 		methods: {
 			/**
-			 * Display a confirmation prompt before deleting a submission
-			 */
-			// deleteSubmissionPromptLocal() {
-			// 	this.openDialog({
-			// 		cancelLabel: this.__('common.no'),
-			// 		modalName: 'deleteSubmission',
-			// 		message: this.__('editor.submissionArchive.confirmDelete'),
-			// 		title: this.__('common.delete'),
-			// 		callback: this.deleteSubmissionLocal
-			// 	});
-			// },
-
-			/**
 		 * Display a confirmation prompt before deleting a submission
 		 */
 		deleteSubmissionPromptLocal() {
