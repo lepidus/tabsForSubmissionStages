@@ -35,12 +35,12 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
 
     public function getDisplayName()
     {
-        return __('plugins.generic.reviewAndInProductionTabsPlugin.displayName');
+        return __('plugins.generic.reviewAndInProductionTabs.displayName');
     }
 
     public function getDescription()
     {
-        return __('plugins.generic.reviewAndInProductionTabsPlugin.description');
+        return __('plugins.generic.reviewAndInProductionTabs.description');
     }
 
     public function displayTabs(string $hookName, array $params): bool
