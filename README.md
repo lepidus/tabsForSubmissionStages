@@ -19,6 +19,10 @@ Under Upload file select the file `reviewAndInProductionTabs.tar.gz`.
 
 Click Save and the plugin will be installed on your website.
 
+## Credits
+
+The development has been made possible by funding from [South African Medical Association](https://www.samedical.org/).
+
 ## License
 
 This plugin is licensed under the GNU General Public License v3.0
