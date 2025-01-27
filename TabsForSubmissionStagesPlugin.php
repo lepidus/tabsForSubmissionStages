@@ -52,7 +52,7 @@ class TabsForSubmissionStagesPlugin extends GenericPlugin
         }
 
         $userRoles = $templateManager->getTemplateVars('userRoles');
-        // only add incomplete submissions tab to super role
+
         if (!array_intersect([Role::ROLE_ID_SITE_ADMIN, Role::ROLE_ID_MANAGER], $userRoles)) {
             return false;
         }
