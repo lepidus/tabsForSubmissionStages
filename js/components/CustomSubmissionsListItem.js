@@ -228,17 +228,14 @@ let listItemTemplate = pkp.Vue.compile(`
 		},
 		computed: {
 			currentUserCanDelete() {
-				if (
+				return (
 					!this.userAssignedRole(pkp.const.ROLE_ID_AUTHOR) &&
 					this.userAssignedRole([
 						pkp.const.ROLE_ID_MANAGER,
 						pkp.const.ROLE_ID_SITE_ADMIN
 					]) &&
 					this.item.submissionProgress
-				) {
-					return true;
-				}
-				return false;
+				);
 			},
 			currentUserCanViewInfoCenter() {
 				return false;

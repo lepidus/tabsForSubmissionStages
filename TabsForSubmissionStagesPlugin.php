@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @file plugins/generic/reviewAndInProductionTabs/ReviewAndInProductionTabsPlugin.php
+ * @file plugins/generic/tabsForSubmissionStages/TabsForSubmissionStagesPlugin.php
  *
- * Copyright (c) 2024 Lepidus Tecnologia
+ * Copyright (c) 2025 Lepidus Tecnologia
  * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
  *
- * @class ReviewAndInProductionTabsPlugin
- * @ingroup plugins_generic_reviewAndInProductionTabs
+ * @class TabsForSubmissionStagesPlugin
+ * @ingroup plugins_generic_tabsForSubmissionStages
  *
- * @brief Review And In Production Tabs plugin class
+ * @brief Tabs for Submission Stages plugin class
  */
 
-namespace APP\plugins\generic\reviewAndInProductionTabs;
+namespace APP\plugins\generic\tabsForSubmissionStages;
 
 use PKP\plugins\GenericPlugin;
 use APP\core\Application;
@@ -22,7 +22,7 @@ use PKP\security\Role;
 use PKP\template\PKPTemplateManager;
 use PKP\submission\PKPSubmission;
 
-class ReviewAndInProductionTabsPlugin extends GenericPlugin
+class TabsForSubmissionStagesPlugin extends GenericPlugin
 {
     public function register($category, $path, $mainContextId = null)
     {
@@ -35,12 +35,12 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
 
     public function getDisplayName()
     {
-        return __('plugins.generic.reviewAndInProductionTabs.displayName');
+        return __('plugins.generic.tabsForSubmissionStages.displayName');
     }
 
     public function getDescription()
     {
-        return __('plugins.generic.reviewAndInProductionTabs.description');
+        return __('plugins.generic.tabsForSubmissionStages.description');
     }
 
     public function displayTabs(string $hookName, array $params): bool
@@ -52,7 +52,7 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
         }
 
         $userRoles = $templateManager->getTemplateVars('userRoles');
-        // only add incomplete submissions tab to super role
+
         if (!array_intersect([Role::ROLE_ID_SITE_ADMIN, Role::ROLE_ID_MANAGER], $userRoles)) {
             return false;
         }
@@ -84,7 +84,7 @@ class ReviewAndInProductionTabsPlugin extends GenericPlugin
 
         $inProductionListPanel = new \APP\components\listPanels\SubmissionsListPanel(
             'inProduction',
-            __('plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel'),
+            __('plugins.generic.tabsForSubmissionStages.acceptedOrInProductionTabLabel'),
             [
                 'apiUrl' => $apiUrl,
                 'getParams' => [
