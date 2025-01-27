@@ -1,8 +1,8 @@
-msgid "plugins.generic.reviewAndInProductionTabs.displayName"
-msgstr "Abas de submissões em revisão e aceitas/em editoração"
+msgid "plugins.generic.tabsForSubmissionStages.displayName"
+msgstr "Abas para Estágios de Submissão"
 
-msgid "plugins.generic.reviewAndInProductionTabs.description"
+msgid "plugins.generic.tabsForSubmissionStages.description"
 msgstr "Adiciona abas de submissões em revisão e aceitas/em editoração na página de submissões."
 
-msgid "plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel"
+msgid "plugins.generic.tabsForSubmissionStages.acceptedOrInProductionTabLabel"
 msgstr "Aceitas/Em editoração"

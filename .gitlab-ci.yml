@@ -1,5 +1,5 @@
 variables:
-  PLUGIN_NAME: 'reviewAndInProductionTabs'
+  PLUGIN_NAME: 'tabsForSubmissionStages'
 
 include:
   - project: 'documentacao-e-tarefas/modelosparaintegracaocontinua'

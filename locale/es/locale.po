@@ -1,8 +1,8 @@
-msgid "plugins.generic.reviewAndInProductionTabs.displayName"
-msgstr "Pestañas de Envíos en Revisión y Aceptados/En Producción"
+msgid "plugins.generic.tabsForSubmissionStages.displayName"
+msgstr "Fichas de las Fases de Envíos"
 
-msgid "plugins.generic.reviewAndInProductionTabs.description"
+msgid "plugins.generic.tabsForSubmissionStages.description"
 msgstr "Agrega pestañas para envíos en revisión y aceptados/en producción en la página de envíos."
 
-msgid "plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel"
+msgid "plugins.generic.tabsForSubmissionStages.acceptedOrInProductionTabLabel"
 msgstr "Aceptados/En Producción"

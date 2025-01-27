@@ -19,7 +19,7 @@
     
 </tab>
 
-<tab id="submissionsInProduction" label="{translate key="plugins.generic.reviewAndInProductionTabs.acceptedOrInProductionTabLabel"}" :badge="components.inProduction.itemsMax">
+<tab id="submissionsInProduction" label="{translate key="plugins.generic.tabsForSubmissionStages.acceptedOrInProductionTabLabel"}" :badge="components.inProduction.itemsMax">
     <submissions-list-panel
         v-bind="components.inProduction"
         @set="set"
