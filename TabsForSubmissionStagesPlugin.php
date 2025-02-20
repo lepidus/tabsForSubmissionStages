@@ -73,6 +73,7 @@ class TabsForSubmissionStagesPlugin extends GenericPlugin
                 'apiUrl' => $apiUrl,
                 'getParams' => [
                     'stageIds' => [WORKFLOW_STAGE_ID_INTERNAL_REVIEW, WORKFLOW_STAGE_ID_EXTERNAL_REVIEW],
+                    'status' => [PKPSubmission::STATUS_QUEUED]
                 ],
                 'lazyLoad' => true,
                 'includeIssuesFilter' => $includeIssuesFilter,
